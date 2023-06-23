@@ -1,0 +1,204 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 import javax.persistence.*;\
+\
+@Entity\
+public class FinancialAdvisor \{\
+    @Id\
+    @GeneratedValue(strategy = GenerationType.IDENTITY)\
+    private int advisorId;\
+\
+    private String name;\
+\
+    // Constructors\
+    public FinancialAdvisor() \{\
+    \}\
+\
+    public FinancialAdvisor(String name) \{\
+        this.name = name;\
+    \}\
+\
+    // Getters and setters\
+    public int getAdvisorId() \{\
+        return advisorId;\
+    \}\
+\
+    public void setAdvisorId(int advisorId) \{\
+        this.advisorId = advisorId;\
+    \}\
+\
+    public String getName() \{\
+        return name;\
+    \}\
+\
+    public void setName(String name) \{\
+        this.name = name;\
+    \}\
+\}\
+import javax.persistence.*;\
+\
+@Entity\
+public class Client \{\
+    @Id\
+    @GeneratedValue(strategy = GenerationType.IDENTITY)\
+    private int clientId;\
+\
+    private String name;\
+\
+    // Constructors\
+    public Client() \{\
+    \}\
+\
+    public Client(String name) \{\
+        this.name = name;\
+    \}\
+\
+    // Getters and setters\
+    public int getClientId() \{\
+        return clientId;\
+    \}\
+\
+    public void setClientId(int clientId) \{\
+        this.clientId = clientId;\
+    \}\
+\
+    public String getName() \{\
+        return name;\
+    \}\
+\
+    public void setName(String name) \{\
+        this.name = name;\
+    \}\
+\}\
+import javax.persistence.*;\
+\
+@Entity\
+public class Portfolio \{\
+    @Id\
+    @GeneratedValue(strategy = GenerationType.IDENTITY)\
+    private int portfolioId;\
+\
+    @ManyToOne\
+    @JoinColumn(name = "clientId")\
+    private Client client;\
+\
+    // Constructors\
+    public Portfolio() \{\
+    \}\
+\
+    public Portfolio(Client client) \{\
+        this.client = client;\
+    \}\
+\
+    // Getters and setters\
+    public int getPortfolioId() \{\
+        return portfolioId;\
+    \}\
+\
+    public void setPortfolioId(int portfolioId) \{\
+        this.portfolioId = portfolioId;\
+    \}\
+\
+    public Client getClient() \{\
+        return client;\
+    \}\
+\
+    public void setClient(Client client) \{\
+        this.client = client;\
+    \}\
+\}\
+import javax.persistence.*;\
+import java.util.Date;\
+\
+@Entity\
+public class Security \{\
+    @Id\
+    @GeneratedValue(strategy = GenerationType.IDENTITY)\
+    private int securityId;\
+\
+    private String name;\
+    private String category;\
+    private Date purchaseDate;\
+    private double purchasePrice;\
+    private int quantity;\
+\
+    @ManyToOne\
+    @JoinColumn(name = "portfolioId")\
+    private Portfolio portfolio;\
+\
+    // Constructors\
+    public Security() \{\
+    \}\
+\
+    public Security(String name, String category, Date purchaseDate, double purchasePrice, int quantity, Portfolio portfolio) \{\
+        this.name = name;\
+        this.category = category;\
+        this.purchaseDate = purchaseDate;\
+        this.purchasePrice = purchasePrice;\
+        this.quantity = quantity;\
+        this.portfolio = portfolio;\
+    \}\
+\
+    // Getters and setters\
+    public int getSecurityId() \{\
+        return securityId;\
+    \}\
+\
+    public void setSecurityId(int securityId) \{\
+        this.securityId = securityId;\
+    \}\
+\
+    public String getName() \{\
+        return name;\
+    \}\
+\
+    public void setName(String name) \{\
+        this.name = name;\
+    \}\
+\
+    public String getCategory() \{\
+        return category;\
+    \}\
+\
+    public void setCategory(String category) \{\
+        this.category = category;\
+    \}\
+\
+    public Date getPurchaseDate() \{\
+        return purchaseDate;\
+    \}\
+\
+    public void setPurchaseDate(Date purchaseDate) \{\
+        this.purchaseDate = purchaseDate;\
+    \}\
+\
+    public double getPurchasePrice() \{\
+        return purchasePrice;\
+    \}\
+\
+    public void setPurchasePrice(double purchasePrice) \{\
+        this.purchasePrice = purchasePrice;\
+    \}\
+\
+    public int getQuantity() \{\
+        return quantity;\
+    \}\
+\
+    public void setQuantity(int quantity) \{\
+        this.quantity = quantity;\
+    \}\
+\
+    public Portfolio getPortfolio() \{\
+        return portfolio;\
+    \}\
+\
+    public void setPortfolio(Portfolio portfolio) \{\
+        this.portfolio = portfolio;\
+    \}\
+\}\
+}
